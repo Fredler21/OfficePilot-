@@ -1,11 +1,10 @@
 import { NextRequest } from 'next/server';
-import { apiSuccess, apiError, requireAdminKey } from '@/lib/api';
+import { apiSuccess, apiError, getUserId } from '@/lib/api';
 import { getKnowledgeSources, deleteKnowledgeSource, searchKnowledge } from '@/lib/knowledge';
 import { migrate } from '@/lib/db';
 
 export async function GET(request: NextRequest) {
   try {
-    requireAdminKey(request);
     migrate();
 
     const query = request.nextUrl.searchParams.get('q');
@@ -25,7 +24,11 @@ export async function GET(request: NextRequest) {
 
 export async function DELETE(request: NextRequest) {
   try {
-    requireAdminKey(request);
+    // Only identified users can delete knowledge
+    const userId = getUserId(request);
+    if (userId === 'default-user') {
+      return apiError({ message: 'Authentication required', code: 'UNAUTHORIZED', statusCode: 401 });
+    }
     migrate();
 
     const source = request.nextUrl.searchParams.get('source');

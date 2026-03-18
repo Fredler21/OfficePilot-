@@ -17,9 +17,7 @@ export function KnowledgePanel() {
 
   const fetchSources = useCallback(async () => {
     try {
-      const res = await fetch('/api/knowledge', {
-        headers: { 'x-admin-key': 'admin' },
-      });
+      const res = await fetch('/api/knowledge');
       const data = await res.json();
       if (data.success) {
         setSources(data.data.sources ?? []);
@@ -61,7 +59,7 @@ export function KnowledgePanel() {
     try {
       const res = await fetch('/api/knowledge/ingest', {
         method: 'POST',
-        headers: { 'x-admin-key': 'admin' },
+        headers: { 'x-user-id': 'office-pilot-user' },
         body: formData,
       });
       const data = await res.json();
@@ -83,7 +81,7 @@ export function KnowledgePanel() {
     try {
       const res = await fetch(`/api/knowledge?source=${encodeURIComponent(source)}`, {
         method: 'DELETE',
-        headers: { 'x-admin-key': 'admin' },
+        headers: { 'x-user-id': 'office-pilot-user' },
       });
       const data = await res.json();
       if (data.success) {

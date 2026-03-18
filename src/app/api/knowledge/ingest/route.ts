@@ -1,11 +1,15 @@
 import { NextRequest } from 'next/server';
-import { apiSuccess, apiError, requireAdminKey } from '@/lib/api';
+import { apiSuccess, apiError, getUserId } from '@/lib/api';
 import { ingestPdf } from '@/lib/knowledge';
 import { migrate } from '@/lib/db';
 
 export async function POST(request: NextRequest) {
   try {
-    requireAdminKey(request);
+    // Require a valid user (not anonymous default-user) to upload knowledge
+    const userId = getUserId(request);
+    if (userId === 'default-user') {
+      return apiError({ message: 'Authentication required to upload knowledge', code: 'UNAUTHORIZED', statusCode: 401 });
+    }
     migrate();
 
     const formData = await request.formData();

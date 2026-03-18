@@ -42,6 +42,8 @@ export function requireAdminKey(request: Request): void {
 }
 
 export function getUserId(request: Request): string {
-  // In a real app, this would come from auth middleware
-  return request.headers.get('x-user-id') ?? 'default-user';
+  // In a real app, this would come from auth middleware (JWT/session)
+  // Sanitize to prevent injection - only allow alphanumeric, hyphens, underscores
+  const raw = request.headers.get('x-user-id') ?? 'default-user';
+  return raw.replace(/[^a-zA-Z0-9_-]/g, '').slice(0, 64) || 'default-user';
 }
