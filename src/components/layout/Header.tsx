@@ -63,14 +63,14 @@ export function Header({ appMode, sidebarOpen, onToggleSidebar }: HeaderProps) {
               <h2 className="text-xl font-bold text-gray-900">⭐ Premium Plan</h2>
               <button onClick={() => setShowModal(false)} className="rounded-full p-1 hover:bg-gray-100 text-gray-500 text-xl leading-none">&times;</button>
             </div>
-            <p className="mb-5 text-sm text-gray-500">Unlock the full power of OfficePilot with GPT-4o — the most accurate AI for Office tasks.</p>
+            <p className="mb-5 text-sm text-gray-500">Take your productivity to the next level with advanced AI capabilities designed for professionals.</p>
             <ul className="mb-6 space-y-3 text-sm">
               {[
-                ['🤖', 'GPT-4o', 'More accurate answers & complex reasoning'],
-                ['📂', 'Unlimited PDF Knowledge', 'Upload unlimited reference documents'],
-                ['⚡', 'Priority responses', 'Faster answers, no rate limits'],
-                ['🔁', 'Full conversation history', 'Access all past sessions'],
-                ['🛠️', 'Advanced formatting tools', 'Templates, batch fixes & more'],
+                ['✨', 'Advanced AI', 'Higher accuracy, deeper reasoning & complex document analysis'],
+                ['📂', 'Unlimited Knowledge Base', 'Upload unlimited reference documents & manuals'],
+                ['⚡', 'Priority Responses', 'Faster answers with no rate limits'],
+                ['🔁', 'Full Conversation History', 'Access and search all past sessions'],
+                ['🛠️', 'Advanced Formatting Tools', 'Templates, batch fixes & style enforcement'],
               ].map(([icon, title, desc]) => (
                 <li key={title} className="flex items-start gap-3">
                   <span className="text-lg">{icon}</span>
