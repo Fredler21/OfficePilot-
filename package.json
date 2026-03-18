@@ -17,6 +17,7 @@
     "db:seed": "tsx src/lib/db/seed.ts"
   },
   "dependencies": {
+    "@anthropic-ai/sdk": "^0.80.0",
     "@google/generative-ai": "^0.24.1",
     "better-sqlite3": "^11.0.0",
     "clsx": "^2.1.0",

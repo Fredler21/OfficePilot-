@@ -7,6 +7,7 @@ import { registerAllTools } from '@/lib/tools';
 import { migrate } from '@/lib/db';
 import { seedTemplates } from '@/lib/templates';
 import { detectLanguage } from '@/lib/i18n';
+import { getUserPlan, isWithinDailyLimit } from '@/lib/subscription';
 import type { AppMode } from '@/lib/types';
 import type { SupportedLanguage } from '@/lib/i18n';
 
@@ -33,7 +34,6 @@ export async function POST(request: NextRequest) {
       language,
       fileContext,
       learningMode,
-      aiProvider,
     } = body as {
       message: string;
       sessionId?: string;
@@ -41,7 +41,6 @@ export async function POST(request: NextRequest) {
       language?: SupportedLanguage;
       fileContext?: string;
       learningMode?: string;
-      aiProvider?: 'openai' | 'gemini';
     };
 
     if (!message?.trim()) {
@@ -49,6 +48,19 @@ export async function POST(request: NextRequest) {
     }
 
     const userId = getUserId(request);
+
+    // Check plan limits
+    const plan = getUserPlan(userId);
+    if (!isWithinDailyLimit(plan)) {
+      return apiError({
+        message: `You've reached your daily limit of ${plan.dailyLimit} messages. Upgrade to Pro for more.`,
+        code: 'RATE_LIMIT_EXCEEDED',
+        statusCode: 429,
+      });
+    }
+
+    // Premium users get Claude, free users get Gemini
+    const provider = plan.canUsePremium ? getAIProvider('claude') : getAIProvider('gemini');
     const detectedLang = language ?? detectLanguage(message);
 
     // Get or create session
@@ -66,7 +78,7 @@ export async function POST(request: NextRequest) {
     sessionStore.addMessage(session.id, 'user', message);
 
     // Run agent
-    const agent = new OfficePilotAgent(getAIProvider(aiProvider));
+    const agent = new OfficePilotAgent(provider);
     const result = await agent.run({
       sessionId: session.id,
       userId,
@@ -88,6 +100,9 @@ export async function POST(request: NextRequest) {
       previews: result.previews,
       appMode: result.metadata.appMode,
       language: result.metadata.language,
+      plan: plan.tier,
+      messagesUsedToday: plan.messagesUsedToday + 1,
+      dailyLimit: plan.dailyLimit,
     });
   } catch (err) {
     return apiError(err);

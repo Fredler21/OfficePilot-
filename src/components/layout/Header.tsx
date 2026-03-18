@@ -58,36 +58,49 @@ export function Header({ appMode, sidebarOpen, onToggleSidebar }: HeaderProps) {
 
       {showModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
-          <div className="w-full max-w-md rounded-2xl bg-white p-6 shadow-xl">
+          <div className="w-full max-w-lg rounded-2xl bg-white p-6 shadow-xl">
             <div className="mb-4 flex items-center justify-between">
-              <h2 className="text-xl font-bold text-gray-900">⭐ Premium Plan</h2>
+              <h2 className="text-xl font-bold text-gray-900">⭐ Upgrade Your Plan</h2>
               <button onClick={() => setShowModal(false)} className="rounded-full p-1 hover:bg-gray-100 text-gray-500 text-xl leading-none">&times;</button>
             </div>
-            <p className="mb-5 text-sm text-gray-500">Take your productivity to the next level with advanced AI capabilities designed for professionals.</p>
-            <ul className="mb-6 space-y-3 text-sm">
-              {[
-                ['✨', 'Smarter Answers', 'Higher accuracy, deeper reasoning & complex document analysis'],
-                ['📂', 'Unlimited Knowledge Base', 'Upload unlimited reference documents & manuals'],
-                ['⚡', 'Priority Responses', 'Faster answers with no rate limits'],
-                ['🔁', 'Full Conversation History', 'Access and search all past sessions'],
-                ['🛠️', 'Advanced Formatting Tools', 'Templates, batch fixes & style enforcement'],
-              ].map(([icon, title, desc]) => (
-                <li key={title} className="flex items-start gap-3">
-                  <span className="text-lg">{icon}</span>
-                  <div>
-                    <span className="font-semibold text-gray-800">{title}</span>
-                    <span className="text-gray-500"> — {desc}</span>
-                  </div>
-                </li>
-              ))}
-            </ul>
-            <button
-              onClick={() => setShowModal(false)}
-              className="w-full rounded-xl bg-gradient-to-r from-yellow-400 to-orange-500 py-3 font-semibold text-white hover:from-yellow-500 hover:to-orange-600 transition-all"
-            >
-              Coming Soon — Get Notified
-            </button>
-            <p className="mt-3 text-center text-xs text-gray-400">No credit card required to get started for free.</p>
+            <p className="mb-6 text-sm text-gray-500">Supercharge your productivity with a plan that fits your needs.</p>
+
+            <div className="grid grid-cols-2 gap-4 mb-6">
+              {/* Pro */}
+              <div className="rounded-xl border-2 border-orange-400 p-4 relative">
+                <span className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-orange-400 px-3 py-0.5 text-xs font-bold text-white">POPULAR</span>
+                <h3 className="text-lg font-bold text-gray-900 mb-1">Pro</h3>
+                <div className="text-2xl font-bold text-orange-500 mb-3">$9.99<span className="text-sm font-normal text-gray-400">/mo</span></div>
+                <ul className="space-y-1.5 text-sm text-gray-600">
+                  <li>✅ 200 messages/day</li>
+                  <li>✅ 10 PDF documents</li>
+                  <li>✅ Smarter responses</li>
+                  <li>✅ Full conversation history</li>
+                  <li>✅ Priority support</li>
+                </ul>
+                <button onClick={() => setShowModal(false)} className="mt-4 w-full rounded-lg bg-orange-500 py-2 text-sm font-semibold text-white hover:bg-orange-600 transition-colors">
+                  Coming Soon
+                </button>
+              </div>
+
+              {/* Business */}
+              <div className="rounded-xl border-2 border-gray-200 p-4">
+                <h3 className="text-lg font-bold text-gray-900 mb-1">Business</h3>
+                <div className="text-2xl font-bold text-gray-800 mb-3">$24.99<span className="text-sm font-normal text-gray-400">/mo</span></div>
+                <ul className="space-y-1.5 text-sm text-gray-600">
+                  <li>✅ Unlimited messages</li>
+                  <li>✅ Unlimited documents</li>
+                  <li>✅ Highest accuracy</li>
+                  <li>✅ Advanced formatting tools</li>
+                  <li>✅ Team features</li>
+                </ul>
+                <button onClick={() => setShowModal(false)} className="mt-4 w-full rounded-lg bg-gray-800 py-2 text-sm font-semibold text-white hover:bg-gray-900 transition-colors">
+                  Coming Soon
+                </button>
+              </div>
+            </div>
+
+            <p className="text-center text-xs text-gray-400">Free plan: 20 messages/day · 1 PDF · No credit card required</p>
           </div>
         </div>
       )}
