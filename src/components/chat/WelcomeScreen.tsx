@@ -4,34 +4,34 @@ import type { AppMode } from '@/lib/types';
 
 const SUGGESTIONS: Record<AppMode, { icon: string; text: string }[]> = {
   general: [
-    { icon: '📝', text: 'Help me write a professional resume in Word' },
-    { icon: '📊', text: 'Create a budget spreadsheet formula in Excel' },
-    { icon: '📽️', text: 'Turn my notes into a 6-slide presentation' },
-    { icon: '🗄️', text: 'Design a customer database in Access' },
+    { icon: '�', text: 'Check if my document follows APA 7th edition format' },
+    { icon: '📊', text: 'Help me fix my VLOOKUP formula in Excel' },
+    { icon: '📽️', text: 'How do I set slide master layouts in PowerPoint?' },
+    { icon: '🗄️', text: 'Show me how to create a relationship between tables in Access' },
   ],
   word: [
-    { icon: '✍️', text: 'Rewrite this paragraph in academic tone' },
-    { icon: '📋', text: 'Generate an outline for my research paper' },
-    { icon: '📚', text: 'Format my citation in APA style' },
-    { icon: '💼', text: 'Help me write a cover letter' },
+    { icon: '📐', text: 'Check my document formatting against APA 7th edition' },
+    { icon: '📚', text: 'Format this citation in MLA 9th edition style' },
+    { icon: '📋', text: 'Validate my heading hierarchy and document structure' },
+    { icon: '📄', text: 'Generate an APA research paper template with correct margins' },
   ],
   excel: [
     { icon: '🔢', text: 'Create a SUMIFS formula for conditional totals' },
     { icon: '🐛', text: 'Why is my VLOOKUP returning #N/A?' },
-    { icon: '📈', text: 'What chart should I use for sales by region?' },
-    { icon: '📊', text: 'Help me build a monthly budget tracker' },
+    { icon: '📈', text: 'What chart type should I use for sales by region?' },
+    { icon: '💡', text: 'Explain how INDEX MATCH works step by step' },
   ],
   powerpoint: [
-    { icon: '🎯', text: 'Turn my essay into a presentation outline' },
-    { icon: '🎤', text: 'Generate speaker notes for my slides' },
-    { icon: '✂️', text: 'Make my slides more concise' },
-    { icon: '🎨', text: 'Suggest visuals for my data slide' },
+    { icon: '🎯', text: 'How do I set up slide masters for consistent formatting?' },
+    { icon: '📐', text: 'What are the best layout principles for data slides?' },
+    { icon: '🎨', text: 'How do I apply a consistent color theme across all slides?' },
+    { icon: '✂️', text: 'Show me how to crop and align images on a slide' },
   ],
   access: [
-    { icon: '🏗️', text: 'Design tables for a small business inventory' },
+    { icon: '🏗️', text: 'How do I normalize my database tables correctly?' },
     { icon: '🔗', text: 'Explain one-to-many relationships simply' },
-    { icon: '🔍', text: 'Write a query to find top customers' },
-    { icon: '📝', text: 'Help me create a data entry form' },
+    { icon: '🔍', text: 'Walk me through writing a parameter query' },
+    { icon: '📝', text: 'How do I create a data entry form with validation?' },
   ],
 };
 
@@ -46,10 +46,10 @@ export function WelcomeScreen({ appMode, onSuggestionClick }: WelcomeScreenProps
   return (
     <div className="flex flex-1 items-center justify-center px-4">
       <div className="max-w-xl text-center">
-        <div className="mb-4 text-5xl">🚀</div>
+        <div className="mb-4 text-5xl">�</div>
         <h2 className="mb-2 text-2xl font-bold text-gray-900">Welcome to OfficePilot</h2>
         <p className="mb-8 text-gray-500">
-          Your AI copilot for Microsoft Office. Ask me about Word, Excel, PowerPoint, or Access.
+          Your AI formatting assistant for Microsoft Office. I help you format, structure, and optimize your documents — not write them for you.
         </p>
 
         <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">

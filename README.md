@@ -4,14 +4,13 @@
   <img src="https://img.shields.io/badge/Tailwind_CSS-3.4-06B6D4?logo=tailwindcss&logoColor=white" alt="Tailwind CSS" />
   <img src="https://img.shields.io/badge/SQLite-WAL-003B57?logo=sqlite" alt="SQLite" />
   <img src="https://img.shields.io/badge/OpenAI-GPT--4o-412991?logo=openai" alt="OpenAI" />
-  <img src="https://img.shields.io/badge/Tests-119%20Passing-brightgreen" alt="Tests" />
 </p>
 
-# 🚀 OfficePilot v1
+# 📐 OfficePilot v2
 
-> **Your AI-powered productivity copilot for Microsoft Office** — helping you write, analyze, format, and build smarter workflows across **Word**, **Excel**, **PowerPoint**, and **Access**.
+> **Your Grammarly-style AI formatting assistant for Microsoft Office** — helping you format, structure, and optimize documents across **Word**, **Excel**, **PowerPoint**, and **Access**. OfficePilot does **NOT** write content for you — it helps you format your own work correctly.
 
-OfficePilot is a full-stack AI assistant that **exclusively** focuses on Microsoft Office. It doesn't do general chat. It doesn't browse the web. It helps you get things done in Office — faster and smarter.
+OfficePilot is a full-stack AI assistant that **exclusively** focuses on Microsoft Office formatting and structure. Think of it as Grammarly, but instead of checking grammar, it checks your document formatting against style guides (APA, MLA, Chicago, Harvard, IEEE, Turabian) and teaches you exactly where to click in Office to fix things.
 
 ---
 
@@ -19,6 +18,7 @@ OfficePilot is a full-stack AI assistant that **exclusively** focuses on Microso
 
 - [✨ Features](#-features)
 - [📦 Supported Office Apps](#-supported-office-apps)
+- [📚 PDF Knowledge Ingestion](#-pdf-knowledge-ingestion)
 - [🏗️ Architecture](#️-architecture)
 - [📂 Project Structure](#-project-structure)
 - [⚡ Quick Start](#-quick-start)
@@ -37,32 +37,36 @@ OfficePilot is a full-stack AI assistant that **exclusively** focuses on Microso
 
 | Feature | Description |
 |---------|-------------|
+| 📐 **Formatting Assistant** | Checks documents against APA, MLA, Chicago, Harvard, IEEE, and Turabian style guides |
+| 📚 **PDF Knowledge Ingestion** | Upload PDFs about Word, Excel, PowerPoint, and Access to build the AI's own reference knowledge |
 | 🤖 **AI Agent Runtime** | ReAct-style reasoning loop with GPT-4o — the agent thinks, calls tools, and responds intelligently |
-| 📄 **Document Understanding** | Upload `.docx`, `.xlsx`, `.pptx` files and get instant context-aware help |
-| 🔧 **23 Specialized Tools** | Purpose-built tools for Word, Excel, PowerPoint, Access, and general tasks |
+| 📄 **Document Understanding** | Upload `.docx`, `.xlsx`, `.pptx` files and get instant formatting analysis |
+| 🔧 **24 Specialized Tools** | Purpose-built tools for formatting checks, citation formatting, structure validation, and more |
 | 🎯 **App Mode Switching** | Switch between Word, Excel, PowerPoint, Access, or General mode for targeted help |
 | 🔄 **Streaming Responses** | Real-time SSE streaming for natural, responsive conversations |
-| 🧠 **Memory & Preferences** | Remembers your style, preferences, and past context across sessions |
-| 📋 **Template Library** | 11 ready-to-use templates across all four Office apps |
-| 👀 **Action Previews** | Destructive changes require approval before execution — never lose your work |
+| 🧠 **Memory & Preferences** | Remembers your style preferences and past context across sessions |
+| 📋 **Template Library** | Ready-to-use correctly-formatted templates across all four Office apps |
+| 👀 **Action Previews** | Destructive changes require approval before execution |
 | 🌍 **Multilingual** | Full support for 🇺🇸 English, 🇫🇷 French, and 🇭🇹 Haitian Creole |
 | 📊 **Learning Modes** | "Do For Me", "Walk Me Through", "Beginner Explain", or "Show Both" |
-| 🗄️ **SQLite Database** | WAL-mode SQLite with full migration system and audit logging |
-| 🔒 **Secure by Design** | Timing-safe admin auth, input validation, XSS prevention, audit trails |
+| ❌ **Not a Content Writer** | OfficePilot does NOT write essays, letters, or paragraphs — it helps you format YOUR work |
 
 ---
 
 ## 📦 Supported Office Apps
 
-> ⚠️ **OfficePilot ONLY helps with Microsoft Office.** Non-Office requests are politely redirected.
+> ⚠️ **OfficePilot ONLY helps with Microsoft Office formatting and structure.** It does NOT write content for users. Non-Office requests are politely redirected.
 
-### 📝 Microsoft Word
-- ✍️ Writing, editing, rewriting text
-- 📐 Document structure, headings, formatting
-- 📖 Citation formatting (APA, MLA, Chicago, Harvard)
-- 📄 Resumes, reports, memos, proposals, cover letters
-- 📋 Summaries, outlines, table of contents
-- ✅ Grammar, tone, clarity improvements
+### 📝 Microsoft Word — Formatting & Structure
+- 📐 Document formatting compliance (APA 7th ed., MLA 9th ed., Chicago, Harvard, IEEE, Turabian)
+- 📏 Heading hierarchy validation (H1 → H2 → H3 proper nesting)
+- 📖 Citation and bibliography formatting (in-text, reference list, footnotes, endnotes)
+- 📄 Margin, spacing, and font specifications per style guide
+- 📋 Title page, abstract, body, and references section ordering
+- 📑 Table of Contents, List of Figures, List of Tables generation
+- 🔢 Page numbering, headers/footers per format requirements
+- 📐 Document structure templates (research paper, essay, thesis, report)
+- 🖱️ Exact instructions for WHERE to click in Word to apply formatting
 
 ### 📊 Microsoft Excel
 - 🧮 Formula generation from plain English
@@ -70,21 +74,65 @@ OfficePilot is a full-stack AI assistant that **exclusively** focuses on Microso
 - 📈 Chart recommendations and data visualization
 - 🧹 Data cleaning and organization
 - 📊 Pivot tables, conditional formatting, VLOOKUP, XLOOKUP, INDEX/MATCH
-- 💰 Budgets, dashboards, trackers, grade sheets
 
 ### 📽️ Microsoft PowerPoint
-- 🎯 Turn notes into structured slide outlines
-- ✂️ Compress verbose slides into concise content
-- 🗣️ Generate tailored speaker notes
-- 🎨 Visual and layout suggestions
-- 📖 Improve storytelling and flow
+- 🎯 Slide master and layout formatting
+- 🎨 Color theme and font consistency
+- 📐 Slide layout principles and alignment
+- 🖼️ Image and visual formatting
+- 📖 Presentation structure and flow
 
 ### 🗃️ Microsoft Access
-- 🏗️ Database schema design from requirements
+- 🏗️ Database schema design and normalization
 - 🔗 Relationship mapping and explanation
 - 📝 Query help (SELECT, JOIN, aggregate, subquery)
-- 📋 Form and report suggestions
+- 📋 Form and report design
 - 🔄 Normalization advice
+
+---
+
+## 📚 PDF Knowledge Ingestion
+
+OfficePilot builds its own knowledge base by ingesting PDF reference materials. Upload official style guides, Office manuals, or formatting references to enhance the AI's expertise.
+
+### How It Works
+
+1. **Upload** a PDF through the Knowledge Base panel in the sidebar or via the API
+2. **Parse** — the PDF text is extracted and split into overlapping chunks (2000 chars, 200 overlap)
+3. **Store** — chunks are indexed in the `indexed_knowledge` table by category
+4. **Retrieve** — when a user asks a question, relevant chunks are searched and injected into the AI's context
+
+### Categories
+
+| Category | Description |
+|----------|-------------|
+| `word` | Microsoft Word formatting, style guides, document structure |
+| `excel` | Excel formulas, functions, data analysis |
+| `powerpoint` | PowerPoint design, layouts, presentations |
+| `access` | Access database design, queries, forms |
+| `general` | General Office knowledge |
+
+### API Usage
+
+```bash
+# Upload a PDF (requires admin key)
+curl -X POST http://localhost:3000/api/knowledge/ingest \
+  -H "x-admin-key: your-admin-key" \
+  -F "file=@apa-7th-edition-guide.pdf" \
+  -F "category=word"
+
+# List all ingested sources
+curl http://localhost:3000/api/knowledge \
+  -H "x-admin-key: your-admin-key"
+
+# Search knowledge base
+curl "http://localhost:3000/api/knowledge?q=apa+margins&category=word" \
+  -H "x-admin-key: your-admin-key"
+
+# Delete a source
+curl -X DELETE "http://localhost:3000/api/knowledge?source=apa-7th-edition-guide.pdf" \
+  -H "x-admin-key: your-admin-key"
+```
 
 ---
 
@@ -95,26 +143,28 @@ OfficePilot is a full-stack AI assistant that **exclusively** focuses on Microso
 │                    🖥️ Frontend (React)                 │
 │  ┌──────────┐  ┌──────────┐  ┌──────────┐  ┌────────┐ │
 │  │  Header   │  │ Sidebar  │  │ChatPanel │  │FileUp  │ │
+│  │          │  │+Knowledge│  │          │  │        │ │
 │  └──────────┘  └──────────┘  └──────────┘  └────────┘ │
 └───────────────────────┬────────────────────────────────┘
                         │ HTTP / SSE
 ┌───────────────────────▼────────────────────────────────┐
 │                  🌐 API Routes (Next.js)               │
 │  /chat  /chat/stream  /files/parse  /sessions  /admin  │
-│  /templates  /actions/preview  /actions/apply  /health  │
+│  /templates  /actions/preview  /actions/apply           │
+│  /knowledge/ingest  /knowledge                          │
 └───────────────────────┬────────────────────────────────┘
                         │
 ┌───────────────────────▼────────────────────────────────┐
 │              🤖 Agent Runtime (ReAct Loop)             │
-│  System Prompt → AI Complete → Tool Calls → Response   │
+│  Knowledge Context → System Prompt → AI → Tools → Resp │
 │            Max 8 reasoning rounds per turn             │
-└───┬───────────────────┬────────────────────────────┬───┘
-    │                   │                            │
-┌───▼──────┐    ┌───────▼──────┐             ┌───────▼──────┐
-│🔧 Tools  │    │📄 Parsers    │             │🗄️ Database   │
-│  (23)    │    │ Word/Excel/  │             │  SQLite WAL  │
-│          │    │ PPT/Access   │             │  11 tables   │
-└──────────┘    └──────────────┘             └──────────────┘
+└───┬───────────┬───────────────────────┬────────────┬───┘
+    │           │                       │            │
+┌───▼──────┐ ┌──▼──────────┐  ┌────────▼─────┐ ┌───▼──────┐
+│🔧 Tools  │ │📄 Parsers   │  │🗄️ Database   │ │📚 Know-  │
+│  (24)    │ │ Word/Excel/ │  │  SQLite WAL  │ │  ledge   │
+│          │ │ PPT/Access  │  │  11 tables   │ │  Base    │
+└──────────┘ └─────────────┘  └──────────────┘ └──────────┘
 ```
 
 ---
@@ -143,14 +193,15 @@ OfficePilot/
 │   │       ├── 📁 sessions/     # GET /sessions/:id
 │   │       ├── 📁 templates/    # GET /templates
 │   │       ├── 📁 actions/      # POST /actions/preview, /actions/apply
-│   │       ├── 📁 health/       # GET /health
+│   │       ├── 📁 knowledge/    # POST /knowledge/ingest, GET/DELETE /knowledge
 │   │       ├── 📁 apps/         # GET /apps/support
 │   │       └── 📁 admin/        # GET /admin/logs, /admin/tools
 │   │
 │   ├── 📁 components/           # React components
 │   │   ├── 📁 layout/           # Header, Sidebar
-│   │   └── 📁 chat/             # ChatPanel, ChatMessage, ChatInput,
-│   │                            # FileUpload, WelcomeScreen
+│   │   ├── 📁 chat/             # ChatPanel, ChatMessage, ChatInput,
+│   │   │                        # FileUpload, WelcomeScreen
+│   │   └── 📁 knowledge/        # KnowledgePanel (PDF upload & management)
 │   │
 │   └── 📁 lib/                  # Core library
 │       ├── 📁 agents/           # 🤖 OfficePilotAgent, prompts, types
@@ -161,13 +212,14 @@ OfficePilot/
 │       ├── 📁 db/               # 🗄️ SQLite connection & migrations
 │       ├── 📁 errors/           # ❌ Typed error hierarchy
 │       ├── 📁 i18n/             # 🌍 Internationalization (en/fr/ht)
+│       ├── 📁 knowledge/        # 📚 PDF ingestion, chunking, search
 │       ├── 📁 logging/          # 📋 Structured JSON logger
 │       ├── 📁 memory/           # 🧠 Memory store
 │       ├── 📁 retrieval/        # 🔍 Knowledge retrieval engine
 │       ├── 📁 session/          # 💬 Session store
 │       ├── 📁 templates/        # 📚 Template library (11 templates)
-│       ├── 📁 tools/            # 🔧 Tool registry + all 23 tools
-│       │   ├── 📁 word/         # 5 Word tools
+│       ├── 📁 tools/            # 🔧 Tool registry + all 24 tools
+│       │   ├── 📁 word/         # 6 Word formatting tools
 │       │   ├── 📁 excel/        # 5 Excel tools
 │       │   ├── 📁 powerpoint/   # 4 PowerPoint tools
 │       │   ├── 📁 access/       # 4 Access tools
@@ -276,8 +328,15 @@ Navigate to **http://localhost:3000** and start chatting with OfficePilot!
 
 | Method | Endpoint | Description |
 |--------|----------|-------------|
-| `GET` | `/api/health` | 💚 Health check |
 | `GET` | `/api/apps/support` | 📋 Supported apps, languages, and modes |
+
+### 📚 Knowledge (requires `x-admin-key` header)
+
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| `POST` | `/api/knowledge/ingest` | 📤 Upload and ingest a PDF into the knowledge base |
+| `GET` | `/api/knowledge` | 📋 List knowledge sources or search (`?q=query&category=word`) |
+| `DELETE` | `/api/knowledge` | 🗑️ Delete a knowledge source (`?source=filename.pdf`) |
 
 ### 🔐 Admin (requires `x-admin-key` header)
 
@@ -358,15 +417,16 @@ The AI agent adapts its language output based on:
 
 ## 🛠️ Tool Inventory
 
-### 📝 Word Tools (5)
+### 📝 Word Tools (6) — Formatting & Structure
 
 | Tool | Description |
 |------|-------------|
-| `analyze_word_document` | 📊 Analyze document structure, headings, word count |
-| `rewrite_selection` | ✍️ Rewrite text with tone/style adjustments (requires preview) |
-| `format_citation` | 📖 Format citations in APA, MLA, Chicago, or Harvard |
-| `generate_outline` | 📋 Create a structured document outline |
-| `summarize_text` | 📝 Summarize text to a target length |
+| `analyze_document_format` | 📐 Check document formatting compliance against APA, MLA, Chicago, Harvard, IEEE, Turabian |
+| `format_citation` | 📖 Format citations in any major style (in-text, reference list, footnotes, endnotes) |
+| `check_document_structure` | 📋 Validate heading hierarchy, section ordering, and document structure |
+| `suggest_formatting_fixes` | 🔧 Suggest fixes for spacing, fonts, margins, and formatting issues (requires preview) |
+| `generate_document_template` | 📄 Generate a correctly-formatted document skeleton per style guide |
+| `format_table_of_contents` | 📑 Generate TOC, List of Figures, or List of Tables |
 
 ### 📊 Excel Tools (5)
 
@@ -498,7 +558,7 @@ This project is for educational and productivity purposes. Built with ❤️ for
 ---
 
 <p align="center">
-  <strong>🚀 OfficePilot v1</strong> — Your AI copilot for Microsoft Office<br/>
+  <strong>� OfficePilot v2</strong> — Your AI formatting assistant for Microsoft Office<br/>
   📝 Word &nbsp;|&nbsp; 📊 Excel &nbsp;|&nbsp; 📽️ PowerPoint &nbsp;|&nbsp; 🗃️ Access<br/>
   🇺🇸 English &nbsp;|&nbsp; 🇫🇷 Français &nbsp;|&nbsp; 🇭🇹 Kreyòl Ayisyen
 </p>

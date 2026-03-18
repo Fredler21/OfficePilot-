@@ -200,7 +200,7 @@ export function ChatPanel({
       {
         id: `msg-${Date.now()}-file`,
         role: 'assistant',
-        content: '📎 File loaded! I can now see your document. Ask me anything about it.',
+        content: '📎 File loaded! I can analyze your document\'s formatting and structure. Ask me to check it against any style guide.',
         timestamp: new Date(),
       },
     ]);

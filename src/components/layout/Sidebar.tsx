@@ -2,10 +2,11 @@
 
 import type { AppMode } from '@/lib/types';
 import type { SupportedLanguage } from '@/lib/i18n';
+import { KnowledgePanel } from '@/components/knowledge/KnowledgePanel';
 
 const APP_MODES: { id: AppMode; label: string; color: string; icon: string; description: string }[] = [
   { id: 'general', label: 'General', color: 'border-brand-500 text-brand-600', icon: '🏠', description: 'All Office apps' },
-  { id: 'word', label: 'Word', color: 'border-[#2b579a] text-[#2b579a]', icon: '📝', description: 'Documents & writing' },
+  { id: 'word', label: 'Word', color: 'border-[#2b579a] text-[#2b579a]', icon: '📝', description: 'Formatting & structure' },
   { id: 'excel', label: 'Excel', color: 'border-[#217346] text-[#217346]', icon: '📊', description: 'Spreadsheets & data' },
   { id: 'powerpoint', label: 'PowerPoint', color: 'border-[#d24726] text-[#d24726]', icon: '📽️', description: 'Presentations' },
   { id: 'access', label: 'Access', color: 'border-[#a4373a] text-[#a4373a]', icon: '🗄️', description: 'Databases' },
@@ -134,6 +135,9 @@ export function Sidebar({
             ))}
           </div>
         </section>
+
+        {/* Knowledge Base */}
+        <KnowledgePanel />
       </div>
     </aside>
   );
@@ -141,19 +145,19 @@ export function Sidebar({
 
 function getQuickActions(appMode: AppMode) {
   const common = [
-    { icon: '🔄', label: 'Rewrite' },
-    { icon: '📋', label: 'Summarize' },
+    { icon: '�', label: 'Format Check' },
+    { icon: '📚', label: 'Citations' },
     { icon: '🌐', label: 'Translate' },
     { icon: '📄', label: 'Template' },
   ];
 
   switch (appMode) {
     case 'word':
-      return [...common, { icon: '✍️', label: 'Outline' }, { icon: '📚', label: 'Citation' }];
+      return [...common, { icon: '📋', label: 'Structure' }, { icon: '🔤', label: 'Styles' }];
     case 'excel':
       return [{ icon: '🔢', label: 'Formula' }, { icon: '💡', label: 'Explain' }, { icon: '📈', label: 'Chart' }, { icon: '🐛', label: 'Debug' }, ...common.slice(0, 2)];
     case 'powerpoint':
-      return [{ icon: '🎯', label: 'Outline' }, { icon: '🎤', label: 'Notes' }, { icon: '✂️', label: 'Compress' }, { icon: '🖼️', label: 'Visuals' }, ...common.slice(0, 2)];
+      return [{ icon: '🎯', label: 'Layout' }, { icon: '🎨', label: 'Theme' }, { icon: '✂️', label: 'Compress' }, { icon: '🖼️', label: 'Visuals' }, ...common.slice(0, 2)];
     case 'access':
       return [{ icon: '🏗️', label: 'Schema' }, { icon: '🔗', label: 'Relations' }, { icon: '🔍', label: 'Query' }, { icon: '📝', label: 'Form' }, ...common.slice(0, 2)];
     default:

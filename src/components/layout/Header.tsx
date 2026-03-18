@@ -42,7 +42,7 @@ export function Header({ appMode, sidebarOpen, onToggleSidebar }: HeaderProps) {
           <span>{mode.label}</span>
         </div>
       </div>
-      <div className="text-sm text-gray-500">AI Copilot for Microsoft Office</div>
+      <div className="text-sm text-gray-500">AI Formatting Assistant for Microsoft Office</div>
     </header>
   );
 }

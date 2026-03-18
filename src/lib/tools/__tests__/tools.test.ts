@@ -17,16 +17,17 @@ const ctx: ToolContext = {
 describe('Word Tools', () => {
   it('has expected tools', () => {
     const names = wordTools.map((t) => t.name);
-    expect(names).toContain('analyze_word_document');
-    expect(names).toContain('rewrite_selection');
+    expect(names).toContain('analyze_document_format');
     expect(names).toContain('format_citation');
-    expect(names).toContain('generate_outline');
-    expect(names).toContain('summarize_text');
+    expect(names).toContain('check_document_structure');
+    expect(names).toContain('suggest_formatting_fixes');
+    expect(names).toContain('generate_document_template');
+    expect(names).toContain('format_table_of_contents');
   });
 
-  it('rewrite_selection requires preview', async () => {
-    const tool = wordTools.find((t) => t.name === 'rewrite_selection')!;
-    const result = await tool.execute({ text: 'Hello world', tone: 'formal' }, ctx);
+  it('suggest_formatting_fixes requires preview', async () => {
+    const tool = wordTools.find((t) => t.name === 'suggest_formatting_fixes')!;
+    const result = await tool.execute({ documentContext: 'Test document', format: 'apa' }, ctx);
     expect(result.success).toBe(true);
     expect(result.requiresPreview).toBe(true);
   });

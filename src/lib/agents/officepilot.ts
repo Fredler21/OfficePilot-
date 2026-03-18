@@ -4,6 +4,7 @@ import type { AIProvider } from '@/lib/ai';
 import { toolRegistry } from '@/lib/tools';
 import type { ToolContext } from '@/lib/tools';
 import { buildSystemPrompt } from './prompts';
+import { buildKnowledgeContext } from '@/lib/knowledge';
 import type { AgentInput, AgentOutput, AgentPreview, AgentStreamEvent } from './types';
 import { logger } from '@/lib/logging';
 
@@ -17,11 +18,14 @@ export class OfficePilotAgent {
   }
 
   async run(input: AgentInput): Promise<AgentOutput> {
+    const knowledgeContext = buildKnowledgeContext(input.userMessage, input.appMode);
     const systemPrompt = buildSystemPrompt(
       input.appMode,
       input.language,
       input.fileContext,
-      input.learningMode
+      input.learningMode,
+      undefined,
+      knowledgeContext || undefined
     );
 
     const toolDefs = toolRegistry.toAIToolDefinitions(input.appMode);
@@ -113,11 +117,14 @@ export class OfficePilotAgent {
   }
 
   async *stream(input: AgentInput): AsyncIterable<AgentStreamEvent> {
+    const knowledgeContext = buildKnowledgeContext(input.userMessage, input.appMode);
     const systemPrompt = buildSystemPrompt(
       input.appMode,
       input.language,
       input.fileContext,
-      input.learningMode
+      input.learningMode,
+      undefined,
+      knowledgeContext || undefined
     );
 
     const toolDefs = toolRegistry.toAIToolDefinitions(input.appMode);
