@@ -1,4 +1,3 @@
-import { PDFParse } from 'pdf-parse';
 import { v4 as uuid } from 'uuid';
 import { getDb } from '@/lib/db';
 import { logger } from '@/lib/logging';
@@ -20,6 +19,7 @@ const CHUNK_OVERLAP = 200; // overlap between chunks for context continuity
  * Parse a PDF file and extract its text content.
  */
 export async function parsePdf(buffer: Buffer, filename: string): Promise<{ text: string; pages: number; info: Record<string, unknown> }> {
+  const { PDFParse } = await import('pdf-parse');
   const parser = new PDFParse({ data: buffer });
   const result = await parser.getText();
   return {

@@ -6,6 +6,7 @@ export class SessionStore {
   createSession(userId: string, appMode: AppMode = 'general', language = 'en'): Session {
     const id = uuid();
     const db = getDb();
+    db.prepare('INSERT OR IGNORE INTO users (id) VALUES (?)').run(userId);
     db.prepare(
       `INSERT INTO sessions (id, user_id, app_mode, language) VALUES (?, ?, ?, ?)`
     ).run(id, userId, appMode, language);
