@@ -1,5 +1,6 @@
 'use client';
 
+import { useState } from 'react';
 import type { AppMode } from '@/lib/types';
 
 const APP_MODES: { id: AppMode; label: string; color: string; icon: string }[] = [
@@ -18,31 +19,78 @@ interface HeaderProps {
 
 export function Header({ appMode, sidebarOpen, onToggleSidebar }: HeaderProps) {
   const mode = APP_MODES.find((m) => m.id === appMode) ?? APP_MODES[0];
+  const [showModal, setShowModal] = useState(false);
 
   return (
-    <header className="flex items-center justify-between border-b border-gray-200 bg-white px-4 py-3 shadow-sm">
-      <div className="flex items-center gap-3">
-        {!sidebarOpen && (
+    <>
+      <header className="flex items-center justify-between border-b border-gray-200 bg-white px-4 py-3 shadow-sm">
+        <div className="flex items-center gap-3">
+          {!sidebarOpen && (
+            <button
+              onClick={onToggleSidebar}
+              className="rounded-md p-2 hover:bg-gray-100"
+              aria-label="Open sidebar"
+            >
+              <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+              </svg>
+            </button>
+          )}
+          <div className="flex items-center gap-2">
+            <span className="text-2xl">🚀</span>
+            <h1 className="text-xl font-bold text-gray-900">OfficePilot</h1>
+          </div>
+          <div className={`flex items-center gap-1.5 rounded-full ${mode.color} px-3 py-1 text-sm font-medium text-white`}>
+            <span>{mode.icon}</span>
+            <span>{mode.label}</span>
+          </div>
+        </div>
+        <div className="flex items-center gap-3">
+          <span className="hidden text-sm text-gray-500 sm:block">AI Formatting Assistant for Microsoft Office</span>
           <button
-            onClick={onToggleSidebar}
-            className="rounded-md p-2 hover:bg-gray-100"
-            aria-label="Open sidebar"
+            onClick={() => setShowModal(true)}
+            className="flex items-center gap-1.5 rounded-full bg-gradient-to-r from-yellow-400 to-orange-500 px-4 py-1.5 text-sm font-semibold text-white shadow-sm hover:from-yellow-500 hover:to-orange-600 transition-all"
           >
-            <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-            </svg>
+            ⭐ Upgrade to Premium
           </button>
-        )}
-        <div className="flex items-center gap-2">
-          <span className="text-2xl">🚀</span>
-          <h1 className="text-xl font-bold text-gray-900">OfficePilot</h1>
         </div>
-        <div className={`flex items-center gap-1.5 rounded-full ${mode.color} px-3 py-1 text-sm font-medium text-white`}>
-          <span>{mode.icon}</span>
-          <span>{mode.label}</span>
+      </header>
+
+      {showModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
+          <div className="w-full max-w-md rounded-2xl bg-white p-6 shadow-xl">
+            <div className="mb-4 flex items-center justify-between">
+              <h2 className="text-xl font-bold text-gray-900">⭐ Premium Plan</h2>
+              <button onClick={() => setShowModal(false)} className="rounded-full p-1 hover:bg-gray-100 text-gray-500 text-xl leading-none">&times;</button>
+            </div>
+            <p className="mb-5 text-sm text-gray-500">Unlock the full power of OfficePilot with GPT-4o — the most accurate AI for Office tasks.</p>
+            <ul className="mb-6 space-y-3 text-sm">
+              {[
+                ['🤖', 'GPT-4o', 'More accurate answers & complex reasoning'],
+                ['📂', 'Unlimited PDF Knowledge', 'Upload unlimited reference documents'],
+                ['⚡', 'Priority responses', 'Faster answers, no rate limits'],
+                ['🔁', 'Full conversation history', 'Access all past sessions'],
+                ['🛠️', 'Advanced formatting tools', 'Templates, batch fixes & more'],
+              ].map(([icon, title, desc]) => (
+                <li key={title} className="flex items-start gap-3">
+                  <span className="text-lg">{icon}</span>
+                  <div>
+                    <span className="font-semibold text-gray-800">{title}</span>
+                    <span className="text-gray-500"> — {desc}</span>
+                  </div>
+                </li>
+              ))}
+            </ul>
+            <button
+              onClick={() => setShowModal(false)}
+              className="w-full rounded-xl bg-gradient-to-r from-yellow-400 to-orange-500 py-3 font-semibold text-white hover:from-yellow-500 hover:to-orange-600 transition-all"
+            >
+              Coming Soon — Get Notified
+            </button>
+            <p className="mt-3 text-center text-xs text-gray-400">No credit card required to get started for free.</p>
+          </div>
         </div>
-      </div>
-      <div className="text-sm text-gray-500">AI Formatting Assistant for Microsoft Office</div>
-    </header>
+      )}
+    </>
   );
 }

@@ -35,7 +35,6 @@ export function ChatPanel({
   const [isLoading, setIsLoading] = useState(false);
   const [fileContext, setFileContext] = useState<string | null>(null);
   const [streamContent, setStreamContent] = useState('');
-  const [aiProvider, setAiProvider] = useState<'openai' | 'gemini'>('openai');
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   const scrollToBottom = useCallback(() => {
@@ -71,7 +70,6 @@ export function ChatPanel({
           language,
           fileContext,
           learningMode,
-          aiProvider,
         }),
       });
 
@@ -149,7 +147,6 @@ export function ChatPanel({
             language,
             fileContext,
             learningMode,
-            aiProvider,
           }),
         });
 
@@ -249,28 +246,6 @@ export function ChatPanel({
         <div className="mx-auto max-w-3xl">
           <div className="flex items-center gap-2 mb-2">
             <FileUpload onFileUploaded={handleFileUploaded} sessionId={sessionId} />
-            <div className="ml-auto flex items-center gap-1 rounded-full border border-gray-200 p-0.5 text-xs">
-              <button
-                onClick={() => setAiProvider('openai')}
-                className={`rounded-full px-2.5 py-0.5 transition-colors ${
-                  aiProvider === 'openai'
-                    ? 'bg-blue-600 text-white'
-                    : 'text-gray-500 hover:text-gray-700'
-                }`}
-              >
-                GPT-4o
-              </button>
-              <button
-                onClick={() => setAiProvider('gemini')}
-                className={`rounded-full px-2.5 py-0.5 transition-colors ${
-                  aiProvider === 'gemini'
-                    ? 'bg-blue-600 text-white'
-                    : 'text-gray-500 hover:text-gray-700'
-                }`}
-              >
-                Gemini
-              </button>
-            </div>
           </div>
           <ChatInput
             onSend={handleSend}
