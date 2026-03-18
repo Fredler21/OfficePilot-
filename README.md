@@ -8,9 +8,9 @@
 
 # 📐 OfficePilot v2
 
-> **Your Grammarly-style AI formatting assistant for Microsoft Office** — helping you format, structure, and optimize documents across **Word**, **Excel**, **PowerPoint**, and **Access**. OfficePilot does **NOT** write content for you — it helps you format your own work correctly.
+> **Your AI formatting assistant for Microsoft Office** — helping you format, structure, and optimize documents across **Word**, **Excel**, **PowerPoint**, and **Access**. OfficePilot does **NOT** write content for you — it helps you format your own work correctly.
 
-OfficePilot is a full-stack AI assistant that **exclusively** focuses on Microsoft Office formatting and structure. Think of it as Grammarly, but instead of checking grammar, it checks your document formatting against style guides (APA, MLA, Chicago, Harvard, IEEE, Turabian) and teaches you exactly where to click in Office to fix things.
+OfficePilot is a full-stack AI assistant that **exclusively** focuses on Microsoft Office formatting and structure. It checks your document formatting against style guides (APA, MLA, Chicago, Harvard, IEEE, Turabian) and teaches you exactly where to click in Office to fix things.
 
 ---
 
