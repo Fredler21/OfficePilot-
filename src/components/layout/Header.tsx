@@ -66,7 +66,7 @@ export function Header({ appMode, sidebarOpen, onToggleSidebar }: HeaderProps) {
             <p className="mb-5 text-sm text-gray-500">Take your productivity to the next level with advanced AI capabilities designed for professionals.</p>
             <ul className="mb-6 space-y-3 text-sm">
               {[
-                ['✨', 'Advanced AI', 'Higher accuracy, deeper reasoning & complex document analysis'],
+                ['✨', 'Smarter Answers', 'Higher accuracy, deeper reasoning & complex document analysis'],
                 ['📂', 'Unlimited Knowledge Base', 'Upload unlimited reference documents & manuals'],
                 ['⚡', 'Priority Responses', 'Faster answers with no rate limits'],
                 ['🔁', 'Full Conversation History', 'Access and search all past sessions'],
