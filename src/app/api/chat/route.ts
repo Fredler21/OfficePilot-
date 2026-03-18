@@ -33,6 +33,7 @@ export async function POST(request: NextRequest) {
       language,
       fileContext,
       learningMode,
+      aiProvider,
     } = body as {
       message: string;
       sessionId?: string;
@@ -40,6 +41,7 @@ export async function POST(request: NextRequest) {
       language?: SupportedLanguage;
       fileContext?: string;
       learningMode?: string;
+      aiProvider?: 'openai' | 'gemini';
     };
 
     if (!message?.trim()) {
@@ -64,7 +66,7 @@ export async function POST(request: NextRequest) {
     sessionStore.addMessage(session.id, 'user', message);
 
     // Run agent
-    const agent = new OfficePilotAgent(getAIProvider());
+    const agent = new OfficePilotAgent(getAIProvider(aiProvider));
     const result = await agent.run({
       sessionId: session.id,
       userId,

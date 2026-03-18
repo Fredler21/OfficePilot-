@@ -2,7 +2,9 @@ import { z } from 'zod';
 
 const envSchema = z.object({
   NODE_ENV: z.enum(['development', 'production', 'test']).default('development'),
-  OPENAI_API_KEY: z.string().min(1, 'OPENAI_API_KEY is required'),
+  OPENAI_API_KEY: z.string().default(''),
+  GEMINI_API_KEY: z.string().default(''),
+  AI_PROVIDER: z.enum(['openai', 'gemini']).default('openai'),
   DATABASE_PATH: z.string().default('./data/officepilot.db'),
   NEXT_PUBLIC_APP_NAME: z.string().default('OfficePilot'),
   NEXT_PUBLIC_DEFAULT_LANGUAGE: z.enum(['en', 'fr', 'ht']).default('en'),

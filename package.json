@@ -17,6 +17,7 @@
     "db:seed": "tsx src/lib/db/seed.ts"
   },
   "dependencies": {
+    "@google/generative-ai": "^0.24.1",
     "better-sqlite3": "^11.0.0",
     "clsx": "^2.1.0",
     "eventsource-parser": "^2.0.0",

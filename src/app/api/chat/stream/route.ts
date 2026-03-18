@@ -26,13 +26,14 @@ export async function POST(request: NextRequest) {
     ensureInit();
 
     const body = await request.json();
-    const { message, sessionId, appMode = 'general', language, fileContext, learningMode } = body as {
+    const { message, sessionId, appMode = 'general', language, fileContext, learningMode, aiProvider } = body as {
       message: string;
       sessionId?: string;
       appMode?: AppMode;
       language?: SupportedLanguage;
       fileContext?: string;
       learningMode?: string;
+      aiProvider?: 'openai' | 'gemini';
     };
 
     if (!message?.trim()) {
@@ -54,7 +55,7 @@ export async function POST(request: NextRequest) {
 
     sessionStore.addMessage(session.id, 'user', message);
 
-    const agent = new OfficePilotAgent(getAIProvider());
+    const agent = new OfficePilotAgent(getAIProvider(aiProvider));
     const encoder = new TextEncoder();
 
     const stream = new ReadableStream({
