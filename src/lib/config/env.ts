@@ -1,3 +1,5 @@
+import os from 'os';
+import path from 'path';
 import { z } from 'zod';
 
 const envSchema = z.object({
@@ -6,7 +8,7 @@ const envSchema = z.object({
   GEMINI_API_KEY: z.string().default(''),
   ANTHROPIC_API_KEY: z.string().default(''),
   AI_PROVIDER: z.enum(['openai', 'gemini', 'claude']).default('gemini'),
-  DATABASE_PATH: z.string().default('./data/officepilot.db'),
+  DATABASE_PATH: z.string().optional(),
   NEXT_PUBLIC_APP_NAME: z.string().default('OfficePilot'),
   NEXT_PUBLIC_DEFAULT_LANGUAGE: z.enum(['en', 'fr', 'ht']).default('en'),
   MAX_FILE_SIZE_MB: z.coerce.number().default(25),
@@ -15,7 +17,22 @@ const envSchema = z.object({
   LOG_LEVEL: z.enum(['debug', 'info', 'warn', 'error']).default('info'),
 });
 
-export type EnvConfig = z.infer<typeof envSchema>;
+export type EnvConfig = Omit<z.infer<typeof envSchema>, 'DATABASE_PATH'> & {
+  DATABASE_PATH: string;
+};
+
+function resolveDatabasePath(nodeEnv: EnvConfig['NODE_ENV'], configuredPath?: string): string {
+  const trimmedPath = configuredPath?.trim();
+  if (trimmedPath) {
+    return trimmedPath;
+  }
+
+  if (nodeEnv === 'production') {
+    return path.join(os.tmpdir(), 'officepilot', 'officepilot.db');
+  }
+
+  return './data/officepilot.db';
+}
 
 let _config: EnvConfig | null = null;
 
@@ -28,7 +45,11 @@ export function getConfig(): EnvConfig {
       .join('\n');
     throw new Error(`Invalid environment configuration:\n${formatted}`);
   }
-  _config = result.data;
+
+  _config = {
+    ...result.data,
+    DATABASE_PATH: resolveDatabasePath(result.data.NODE_ENV, result.data.DATABASE_PATH),
+  };
   return _config;
 }
 
